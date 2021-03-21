@@ -6,7 +6,7 @@
 /*   By: bigjobio <bigjobio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 18:48:01 by bigjobio          #+#    #+#             */
-/*   Updated: 2021/03/20 22:09:55 by bigjobio         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:51:35 by bigjobio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,49 @@
 # include "mms/mlx.h"
 # include <stdio.h>
 # include <string.h>
+# include <fcntl.h>
+# include <errno.h>
+# include "gnl/get_next_line.h"
 
-
-
-
-typedef struct          s_mlx
+typedef struct                  s_list
 {
-    void            *ptr;
-}                       t_mlx;
+    char    *razreshenie;
+    int     razmerRazresheniya1;
+    int     razmerRazresheniya2;
+    char    *north;
+    char    *path_to_north;
+    char    *south;
+    char    *path_to_south;
+    char    *west;
+    char    *path_to_west;
+    char    *east;
+    char    *path_to_east;
+    char    *sprite;
+    char    *path_to_sprite;
+    char    *floor;
+    int     floor_red;
+    int     floor_green;
+    int     floor_blue;
+    char    *ceiling;
+    int     ceiling_red;
+    int     ceiling_green;
+    int     ceiling_blue;
+        
+}                               t_list;
 
-typedef struct          s_win
-{
-    void            *ptr;
-    int             x;
-    int             y;
-}                       t_win;
-
-typedef struct          s_img
-{
-    void            *ptr;
-    unsigned int    *adr;
-    int             flash;
-}                       t_img;
-
-typedef struct          s_error
-{
-    int             a;
-    int             b;
-    int             c;
-}                       t_error;
-
-typedef struct          s_list
-{
-    t_mlx           mlx;
-    t_win           win;
-    t_img           img;
-    t_error         error;
-}                       t_list;
 
 void    print_error(int numerror);
-void     errors(int  argc, char **argv);
-void     errors2(int  argc, char **argv);
+void    errors(int  argc, char **argv);
+void    errors2(int  argc, char **argv);
+void    init_flags(t_list *big);
+int     gnl(int  argc, char **argv, t_list *list);
+void    parse_r(char *line, t_list *list, char **big);
+void    parse_NO(char *line, t_list *list, char **big);
+void    parse_SO(char *line, t_list *list, char **big);
+void    parse_WE(char *line, t_list *list, char **big);
+void    parse_EA(char *line, t_list *list, char **big);
+void    parse_S(char *line, t_list *list, char **big);
+void    parse_F(char *line, t_list *list, char **big);
+
 
 #endif
