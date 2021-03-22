@@ -1,38 +1,114 @@
 #include "Libft/libft.h"
 #include "cub3d.h"
 
-void    parse_F(char *line, t_list *list, char **big)
+int    check_digit(char *line, int *i)
 {
-    char    **new;
-    char    **new2;
+    int     digit;
+
+    digit = 0;
+    if (line[0] == 'F')
+    {
+        if (!ft_isdigit(line[*i]))
+            print_error(-25);
+        else 
+        {
+            digit = ft_atoi(&line[*i]);
+            while (ft_isdigit(line[*i]))
+                (*i)++;
+        }
+    }
+    else
+    {
+        if (!ft_isdigit(line[*i]))
+            print_error(-25);
+        else 
+        {
+            digit = ft_atoi(&line[*i]);
+            while (ft_isdigit(line[*i]))
+                (*i)++;
+        }
+    }
+    return (digit);
+}
+
+void    test(char *line, t_list *list)
+{
     int     i;
 
     i = 0;
-    new = ft_split(big[1], ',');
-    new2 = ft_split(new[0], ' ');
-    while (new2[0][i] )
-    {
-        if (!(ft_isdigit(new2[0][i])))
-            print_error(-10);
+    if (list->floor_red != 0)
+        print_error(-28);
+    while (line[i] == ' ' && line[0] == ' ')
         i++;
-    }
-    list->floor_red = ft_atoi(new2[0]);
-    new2 = ft_split(new[1], ' ');
+    list->floor_red = check_digit(line, &i);
+    while (line[i] == ' ')
+        i++;
+    if (line[i++] != ',')
+        print_error(-26);
+    while (line[i] == ' ')
+        i++;
+    list->floor_green = check_digit(line, &i);
+    while (line[i] == ' ')
+        i++;
+    if (line[i++] != ',')
+        print_error(-26);
+    while (line[i] == ' ')
+        i++;
+    list->floor_blue = check_digit(line, &i);
+    while (line[i] == ' ')
+        i++;
+    if (line[i])
+        print_error(-27);
+}
+
+void    test2(char *line, t_list *list)
+{
+    int     i;
+
     i = 0;
-    while (new2[0][i])
-    {
-        if (!(ft_isdigit(new2[0][i])))
-            print_error(-10);
+    if (list->ceiling_red != 0)
+        print_error(-30);
+    while (line[i] == ' ' && line[0] == ' ')
         i++;
-    }
-    list->floor_green = ft_atoi(new2[0]);
-    new2 = ft_split(new[2], ' ');
-    i = 0;
-    while (new2[0][i])
-    {
-        if (!(ft_isdigit(new2[0][i])))
-            print_error(-10);
+    list->ceiling_red = check_digit(line, &i);
+    while (line[i] == ' ')
         i++;
-    }
-    list->floor_blue = ft_atoi(new2[0]);
+    if (line[i++] != ',')
+        print_error(-31);
+    while (line[i] == ' ')
+        i++;
+    list->ceiling_green = check_digit(line, &i);
+    while (line[i] == ' ')
+        i++;
+    if (line[i++] != ',')
+        print_error(-31);
+    while (line[i] == ' ')
+        i++;
+    list->ceiling_blue = check_digit(line, &i);
+    while (line[i] == ' ')
+        i++;
+    if (line[i])
+        print_error(-32);
+}
+
+void    parse_F(char *line, t_list *list)
+{
+    test((line + 1), list);
+    if (list->floor_red < 0 || list->floor_red > 255)
+        print_error(-29);
+    if (list->floor_green < 0 || list->floor_green > 255)
+        print_error(-29);
+    if (list->floor_blue < 0 || list->floor_blue > 255)
+        print_error(-29);
+}
+
+void    parse_C(char *line, t_list *list)
+{
+    test2((line + 1), list);
+    if (list->ceiling_red < 0 || list->ceiling_red > 255)
+        print_error(-29);
+    if (list->ceiling_green < 0 || list->ceiling_green > 255)
+        print_error(-29);
+    if (list->ceiling_blue < 0 || list->ceiling_blue > 255)
+        print_error(-29);
 }

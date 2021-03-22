@@ -6,7 +6,7 @@
 /*   By: bigjobio <bigjobio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 18:48:01 by bigjobio          #+#    #+#             */
-/*   Updated: 2021/03/21 15:51:35 by bigjobio         ###   ########.fr       */
+/*   Updated: 2021/03/22 23:47:50 by bigjobio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 
 typedef struct                  s_list
 {
-    char    *razreshenie;
-    int     razmerRazresheniya1;
-    int     razmerRazresheniya2;
-    char    *north;
+    int     r_x;
+    int     r_y;
     char    *path_to_north;
     char    *south;
     char    *path_to_south;
@@ -53,13 +51,14 @@ void    errors(int  argc, char **argv);
 void    errors2(int  argc, char **argv);
 void    init_flags(t_list *big);
 int     gnl(int  argc, char **argv, t_list *list);
-void    parse_r(char *line, t_list *list, char **big);
-void    parse_NO(char *line, t_list *list, char **big);
-void    parse_SO(char *line, t_list *list, char **big);
-void    parse_WE(char *line, t_list *list, char **big);
-void    parse_EA(char *line, t_list *list, char **big);
-void    parse_S(char *line, t_list *list, char **big);
-void    parse_F(char *line, t_list *list, char **big);
+void    parse_r(t_list *list, char **big);
+void    parse_NO(t_list *list, char **big);
+void    parse_SO(t_list *list, char **big);
+void    parse_WE(t_list *list, char **big);
+void    parse_EA(t_list *list, char **big);
+void    parse_S(t_list *list, char **big);
+void    parse_F(char *line, t_list *list);
+void    parse_C(char *line, t_list *list);
 
 
 #endif

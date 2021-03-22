@@ -1,14 +1,17 @@
 #include "Libft/libft.h"
 #include "cub3d.h"
 
-void    parse_r(char *line, t_list *list, char **big)
+void    parse_r(t_list *list, char **big)
 {
     int     i;
     int     j;
 
     j = 0;
     i = 1;
-    list->razreshenie = "R";
+    if (list->r_x != 0)
+        print_error(-13);
+    if (big[3] != NULL)
+        print_error(-14);
     while (i < 3)
     {
         while (big[i][j])
@@ -18,52 +21,54 @@ void    parse_r(char *line, t_list *list, char **big)
             j++;
         }
         if (i == 1)
-            list->razmerRazresheniya1 = ft_atoi(big[i]);
+            list->r_x = ft_atoi(big[i]);
         else if(i == 2)
-            list->razmerRazresheniya2 = ft_atoi(big[i]);
+            list->r_y = ft_atoi(big[i]);
         i++;
     }
-    printf("R если разрешение  == %s\n", list->razreshenie);
-    printf("Разрешение экрана 1 == %d\n", list->razmerRazresheniya1);
-    printf("Разрешение экрана 2 == %d", list->razmerRazresheniya2);
 }
 
-void    parse_NO(char *line, t_list *list, char **big)
+void    parse_NO(t_list *list, char **big)
 {
-    list->north = "NO";
-    if (big[1][0] != '.' || big[1][1] != '/')
-        print_error(-5);
-    list->path_to_north = big[1];
+    if (big[2] != NULL)
+        print_error(-20);
+    if (list->path_to_north != NULL)
+        print_error(-15);
+    list->path_to_north = ft_strdup(big[1]);
 }
 
-void    parse_SO(char *line, t_list *list, char **big)
+void    parse_SO(t_list *list, char **big)
 {
-    list->south = "SO";
-    if (big[1][0] != '.' || big[1][1] != '/')
-        print_error(-6);
-    list->path_to_south = big[1];
+    if (big[2] != NULL)
+        print_error(-19);
+    if (list->path_to_south != NULL)
+        print_error(-16);
+    list->path_to_south = ft_strdup(big[1]);
 }
 
-void    parse_WE(char *line, t_list *list, char **big)
+void    parse_WE(t_list *list, char **big)
 {
-    list->west = "WE";
-    if (big[1][0] != '.' || big[1][1] != '/')
-        print_error(-7);
-    list->path_to_west = big[1];
+    if (big[2] != NULL)
+        print_error(-18);
+    if (list->path_to_west != NULL)
+        print_error(-17);
+    list->path_to_west = ft_strdup(big[1]);
 }
 
-void    parse_EA(char *line, t_list *list, char **big)
+void    parse_EA(t_list *list, char **big)
 {
-    list->east = "EA";
-    if (big[1][0] != '.' || big[1][1] != '/')
-        print_error(-8);
-    list->path_to_east = big[1];
+    if (big[2] != NULL)
+        print_error(-21);
+    if (list->path_to_east != NULL)
+        print_error(-22);
+    list->path_to_east = ft_strdup(big[1]);
 }
 
-void    parse_S(char *line, t_list *list, char **big)
+void    parse_S(t_list *list, char **big)
 {
-    list->sprite = "S";
-    if (big[1][0] != '.' || big[1][1] != '/')
-        print_error(-9);
-    list->path_to_sprite = big[1];
+    if (big[2] != NULL)
+        print_error(-23);
+    if (list->path_to_sprite != NULL)
+        print_error(-24);
+    list->path_to_sprite = ft_strdup(big[1]);
 }
