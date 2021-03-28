@@ -1,2 +1,0 @@
-gcc main.c errors.c init_flags.c gnl.c parse_for_map.c parse_F_C.c gnl/get_next_line.c gnl/get_next_line_utils.c  -LLibft -lft
-
