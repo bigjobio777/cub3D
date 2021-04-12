@@ -2,7 +2,7 @@
 #include "cub3d.h"
 #include <math.h>
 
-double		cast_ray_x_n(t_list   *list, double tempo)
+double		cast_ray_x_1(t_list *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -22,14 +22,14 @@ double		cast_ray_x_n(t_list   *list, double tempo)
 		length_x = x - list->pos_x;
 		length_y = length_x * tan(tempo);
 		dot_y = length_y + list->pos_y;
-		if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
-			help = 1;
+		// if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
+		// 	help = 1;
 	}
 	length_for_wall = fabs(length_y / sin(tempo));
 	return(length_for_wall);
 }
 
-double	   cast_ray_y_n(t_list   *list, double tempo)
+double	   cast_ray_y_1(t_list   *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -50,15 +50,15 @@ double	   cast_ray_y_n(t_list   *list, double tempo)
 		length_y = y - list->pos_y;
 		length_x = length_y / tan(tempo);
 		dot_x = length_x + list->pos_x;
-		if (!((y < list->max_y && y >= 0) && (dot_x >= 0 && dot_x < list->max_x)))
-			help = 1;
+		// if (!((y < list->max_y && y >= 0) && (dot_x >= 0 && dot_x < list->max_x)))
+		// 	help = 1;
 	}
 
 	length_for_wall = fabs(length_y / sin(tempo));
 	return(length_for_wall);
 }
 
-double		cast_ray_x_w(t_list   *list, double tempo)
+double		cast_ray_x_2(t_list   *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -78,14 +78,14 @@ double		cast_ray_x_w(t_list   *list, double tempo)
 		length_x = x - list->pos_x;
 		length_y = length_x * tan(tempo);
 		dot_y = length_y + list->pos_y;
-		if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
-			help = 1;
+		// if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
+		// 	help = 1;
 	}
 	length_for_wall = fabs(length_x / cos(tempo));
 	return(length_for_wall);
 }
 
-double	   cast_ray_y_w(t_list   *list, double tempo)
+double	   cast_ray_y_2(t_list   *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -105,15 +105,15 @@ double	   cast_ray_y_w(t_list   *list, double tempo)
 		length_y = y - list->pos_y;
 		length_x = length_y / tan(tempo);
 		dot_x = list->pos_x + length_x;
-		if (!((y < list->max_y && y >= 0) && (dot_x >= 0 && dot_x < list->max_x)))
-			help = 1;
+		// if (!((y < list->max_y && y >= 0) && (dot_x >= 0 && dot_x < list->max_x)))
+		// 	help = 1;
 	}
 
 	length_for_wall = fabs(length_y / sin(tempo));
 	return(length_for_wall);
 }
 
-double		cast_ray_x_s(t_list   *list, double tempo)
+double		cast_ray_x_3(t_list   *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -130,17 +130,17 @@ double		cast_ray_x_s(t_list   *list, double tempo)
 	while (((int)dot_y < list->max_y && (int)dot_y >= 0) && (x - 1 >= 0 && x - 1 < list->max_x) && list->karta[(int)(dot_y)][x - 1] != '1' && help == 0)
 	{
 		x--;
-		length_x = list->pos_x - x;
+		length_x = x - list->pos_x;
 		length_y = length_x * tan(tempo);
 		dot_y = length_y + list->pos_y;
-		if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
-			help = 1;
+		// if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
+		// 	help = 1;
 	}
 	length_for_wall = fabs(length_x / cos(tempo));
 	return(length_for_wall);
 }
 
-double	   cast_ray_y_s(t_list   *list, double tempo)
+double	   cast_ray_y_3(t_list   *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -155,20 +155,20 @@ double	   cast_ray_y_s(t_list   *list, double tempo)
 	length_x = length_y / tan(tempo);
 	dot_x = length_x + list->pos_x;
 	
-	while ((y < list->max_y && y >= 0) && (dot_x - 1 >= 0 && dot_x - 1 < list->max_x) && list->karta[y][((int)(dot_x) - 1)] != '1')
+	while ((y - 1 < list->max_y && y - 1 >= 0) && (dot_x >= 0 && dot_x  < list->max_x) && list->karta[y - 1][(int)dot_x] != '1')
 	{
 		y--;
 		length_y = y - list->pos_y;
 		length_x = length_y / tan(tempo);
 		dot_x = length_x + list->pos_x;
-		if (!((y < list->max_y && y >= 0) && (dot_x - 1 >= 0 && dot_x - 1 < list->max_x)))
-			help = 1;
+		// if (!((y < list->max_y && y >= 0) && (dot_x - 1 >= 0 && dot_x - 1 < list->max_x)))
+		// 	help = 1;
 	}
 	length_for_wall = fabs(length_y / sin(tempo));
 	return(length_for_wall);
 }
 
-double		cast_ray_x_e(t_list *list, double tempo)
+double		cast_ray_x_4(t_list *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -185,17 +185,17 @@ double		cast_ray_x_e(t_list *list, double tempo)
 	while (((int)dot_y < list->max_y && (int)dot_y >= 0) && (x >= 0 && x < list->max_x) && list->karta[(int)(dot_y)][x] != '1' && help == 0)
 	{
 		x++;
-		length_x = list->pos_x - x;
+		length_x = x - list->pos_x;
 		length_y = length_x * tan(tempo);
 		dot_y = length_y + list->pos_y;
-		if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
-			help = 1;
+		// if (!((dot_y < list->max_y && dot_y >= 0) && (x >= 0 && x < list->max_x)))
+		// 	help = 1;
 	}
 	length_for_wall = fabs(length_x / cos(tempo));
 	return(length_for_wall);
 }
 
-double		cast_ray_y_e(t_list *list, double tempo)
+double		cast_ray_y_4(t_list *list, double tempo)
 {
 	double  length_x;
 	double  length_y;
@@ -209,14 +209,14 @@ double		cast_ray_y_e(t_list *list, double tempo)
 	length_y = y - list->pos_y;
 	length_x = length_y / tan(tempo);
 	dot_x = length_x + list->pos_x;
-	while ((y < list->max_y && y>= 0) && (dot_x - 1 >= 0 && dot_x - 1 < list->max_x) && list->karta[y][(int)dot_x - 1] != '1' && help == 0)
+	while ((y - 1< list->max_y && y>= 0) && (dot_x  >= 0 && dot_x < list->max_x) && list->karta[y - 1][(int)dot_x] != '1' && help == 0)
 	{
 		y--;
 		length_y = y - list->pos_y;
 		length_x = length_y / tan(tempo);
 		dot_x = length_x + list->pos_x;
-		if (!((y - 1 < list->max_y && y - 1 >= 0) && (dot_x - 1 >= 0 && dot_x - 1 < list->max_x)))
-			help = 1;
+		// if (!((y - 1 < list->max_y && y - 1 >= 0) && (dot_x - 1 >= 0 && dot_x - 1 < list->max_x)))
+		// 	help = 1;
 	}
 	length_for_wall = fabs(length_y / sin(tempo));
 	return(length_for_wall);
@@ -238,33 +238,38 @@ void		cast_rays(t_list *list)
 	increment_FOV = list->FOV / list->r_x;
 	while ((tempo >= (list->pos_angle - list->FOV / 2)) && (i < list->r_x))
 	{
-		if (tempo >= 2 * M_PI)
-			tempo -= 2 * M_PI;
-		else if (tempo < 0)
-			tempo += 2 * M_PI;
-		if (tempo >= 0 && tempo < (M_PI / 2))
+		// if (tempo >= 2 * M_PI)
+		// 	tempo -= 2 * M_PI;
+		// else if (tempo < 0)
+		// 	tempo += 2 * M_PI;
+		if ((tempo >= 0 && tempo < (M_PI / 2)) || (tempo >= 2*M_PI && tempo <= 5*M_PI_2))
 		{
-			first = cast_ray_x_n(list, tempo);
-			second = cast_ray_y_n(list,tempo);
+			first = cast_ray_x_1(list, tempo);
+			second = cast_ray_y_1(list,tempo);
 			make_image(list, i, fmin(first, second));
 		}
-		else if (tempo >= (M_PI / 2) && tempo < M_PI)
+		else if (tempo >= (M_PI_2) && tempo < M_PI)
 		{
-			first = cast_ray_x_w(list, tempo);
-			second = cast_ray_y_w(list,tempo);
+			first = cast_ray_x_2(list, tempo);
+			second = cast_ray_y_2(list,tempo);
 			make_image(list, i, fmin(first, second));
 		}
-		else if (tempo >= M_PI && tempo < (3 * (M_PI / 2)))
+		else if (tempo >= M_PI && tempo < (3 * (M_PI_2)))
 		{
-			first = cast_ray_x_s(list, tempo);
-			second = cast_ray_y_s(list,tempo);
+			first = cast_ray_x_3(list, tempo);
+			second = cast_ray_y_3(list,tempo);
 			make_image(list, i, fmin(first, second));
 		}
-		else if (tempo >= (3 * (M_PI / 2)) && tempo < (2 * M_PI))
+		else if ((tempo >= (3 * (M_PI / 2)) && tempo < (2 * M_PI)) || (tempo >= -M_PI_2 && tempo <= 0))
 		{
-			first = cast_ray_x_e(list, tempo);
-			second = cast_ray_y_e(list,tempo);
+			first = cast_ray_x_4(list, tempo);
+			second = cast_ray_y_4(list,tempo);
 			make_image(list, i, fmin(first, second));
+		}
+		else
+		for(int j = 0; j < list->r_y; j++)
+		{
+			my_mlx_pixel_put(list, i, j, 0xFFFFFF);
 		}
 		i++;
 		tempo -= increment_FOV;

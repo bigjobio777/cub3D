@@ -27,10 +27,10 @@ void		init_flags(t_list *big)
 	big->pos_x = 15;
 	big->pos_y = 15;
 	big->pos_angle = 1;
-	big->FOV = (M_PI / 8);
+	big->FOV = (M_PI / 2);
 	big->max_x = 0;
 	big->max_y = 0;
-	big->focus = 0.5;
+	big->focus = 1;
 
 	while (i < 127)
 	{
